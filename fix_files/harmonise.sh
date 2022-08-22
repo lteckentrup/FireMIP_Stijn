@@ -1,7 +1,7 @@
 ### Model names
-declare -a model_list=('CLASS-CTEM' 'CLM' 'Inferno' 'LPJ-GUESS-GlobFIRM'
-                       'LPJ-GUESS-SIMFIRE-BLAZE' 'LPJ-GUESS-SPITFIRE' 
-                       'ORCHIDEE-SPITFIRE')
+declare -a model_list=('CLASS-CTEM' 'CLM' 'Inferno' 'JSBACH-SPITFIRE' 
+                       'LPJ-GUESS-GlobFIRM' 'LPJ-GUESS-SIMFIRE-BLAZE' 
+                       'LPJ-GUESS-SPITFIRE' 'ORCHIDEE-SPITFIRE')
                                               
 ### In raw_data: Check variable names, if fFire is total or per PFT, units
 for model in "${model_list[@]}"; do
