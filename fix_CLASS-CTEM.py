@@ -31,7 +31,10 @@ da.time.encoding['calendar'] = '365_day'
 da['lat'].attrs={'units':'degrees', 'long_name':'latitude'}
 da['lon'].attrs={'units':'degrees', 'long_name':'longitude'}
 
+### Convert DataArray to DataSet
 ds = da.to_dataset()
+
+### Write netCDF
 ds.to_netcdf(fname,
              encoding={'time':{'dtype': 'double'},
                        'lat':{'dtype': 'double'},
