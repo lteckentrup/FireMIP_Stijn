@@ -20,9 +20,8 @@ da = xr.DataArray(
     fFire,
     dims=('time', 'lat', 'lon'),
     coords={'time': time, 'lat': lat, 'lon': lon},
-    attrs={'units': 'kgC/m^2/s',
-           'long_name': 'CO2_emission_from_fire',
-           'Title': 'CLM output generated for 2016 FireMIP'}
+    attrs={'units': 'kg C m-2 s-1',
+           'long_name': 'CO2_emission_from_fire'}
 )
 
 da.time.encoding['units'] = 'Months since 1850-01-01 00:00:00'
@@ -32,11 +31,8 @@ da.time.encoding['calendar'] = '365_day'
 da['lat'].attrs={'units':'degrees', 'long_name':'latitude'}
 da['lon'].attrs={'units':'degrees', 'long_name':'longitude'}
 
-### Convert DataArray to DataSet
 ds = da.to_dataset(name='fFire')
-
-### Write netCDF
-ds.to_netcdf(fname,
+ds.to_netcdf('raw/'+fname,
              encoding={'time':{'dtype': 'double'},
                        'lat':{'dtype': 'double'},
                        'lon':{'dtype': 'double'},
