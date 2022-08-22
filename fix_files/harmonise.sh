@@ -27,9 +27,9 @@ python fix_CLM.py
 python fix_LPJ-GUESS-SPITFIRE.py
 
 ### Sort grid for CLASS-CTEM and LPJ-GUESS-SPITFIRE
-cdo -b F64 setgrid,grid_class_ctem.txt CLASS-CTEM_SF1_fFire.nc \
+cdo -b F64 setgrid,grid_CLASS-CTEM.txt CLASS-CTEM_SF1_fFire.nc \
     ../raw/CLASS-CTEM_SF1_fFire.nc
-cdo -b F64 remapycon,grid.txt LPJ-GUESS-SPITFIRE_SF1_fFire_coords.nc \
+cdo -b F64 remapycon,grid_LPJ-GUESS-SPITFIRE.txt LPJ-GUESS-SPITFIRE_SF1_fFire_coords.nc \
     ../raw/LPJ-GUESS-SPITFIRE_SF1_fFire.nc
     
 ### Select years 1901-2013, harmonize grid
