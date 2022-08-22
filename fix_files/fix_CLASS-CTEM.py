@@ -5,9 +5,7 @@ import numpy as np
 fname = 'CLASS-CTEM_SF1_fFire.nc'
 ds = xr.open_dataset('corrupted/'+fname)
 
-### Get data
-fFire = ds.fFire
-time = ds.time
+### Define latitudes and longitudes
 lat = [-87.8638, -85.09653, -82.31291, -79.5256, -76.7369, -73.94752, -71.15775,
        -68.36776, -65.57761, -62.78735, -59.99702, -57.20663, -54.4162,
        -51.62573, -48.83524, -46.04473, -43.2542, -40.46365, -37.67309,
@@ -20,27 +18,18 @@ lat = [-87.8638, -85.09653, -82.31291, -79.5256, -76.7369, -73.94752, -71.15775,
        76.7369, 79.5256, 82.31291, 85.09653, 87.8638]
 lon = np.arange(0,360,360/len(ds.x))
 
-### Create DataArray
-da = xr.DataArray(
-    fFire,
-    dims=('time', 'lat', 'lon'),
-    coords={'time': time, 'lat': lat, 'lon': lon},
-    attrs={'units': 'kgC/m^2/s',
-           'long_name': 'CO2_emission_from_fire',
-           'Title': 'CLASS-CTEM output generated for 2016 FireMIP',
-           'Comment': 'Note the PFT 10 is bare ground',
-           'Contact': 'Joe Melton, joe.melton@canada.ca',
-           'code_id': '1f5a65728aa0bf6c3b30f5ca907de90a7aa47be0'}
-)
+### Update latitudes and longitudes in DataSet
+ds['y'] = lat
+ds['x'] = lon
 
-da.time.encoding['units'] = 'Months since 1861-01-01 00:00:00'
-da.time.encoding['long_name'] = 'time'
-da.time.encoding['calendar'] = '365_day'
+### Rename dimensions and coordinates
+ds = ds.rename({'y': 'lat', 'x' : 'lon'})
 
-da['lat'].attrs={'units':'degrees', 'long_name':'latitude'}
-da['lon'].attrs={'units':'degrees', 'long_name':'longitude'}
+### Set attributes
+ds['lat'].attrs={'units':'degrees', 'long_name':'latitude'}
+ds['lon'].attrs={'units':'degrees', 'long_name':'longitude'}
 
-ds = da.to_dataset()
+### Write to netCDF
 ds.to_netcdf('raw/'+fname,
              encoding={'time':{'dtype': 'double'},
                        'lat':{'dtype': 'double'},
