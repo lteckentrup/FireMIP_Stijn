@@ -80,7 +80,8 @@ for model in "${model_list[@]}"; do
     fi
 done
 
-#### Regrid all models on finest grid: Target LPJ-GUESS
+#### Regrid all models on finest grid: Target LPJ-GUESS. 
+### ORCHIDEE also has a half degree grid
 for model in "${model_list[@]}"; do
     if [ ${model} = LPJ-GUESS-GlobFIRM ] || [ ${model} = LPJ-GUESS-GlobFIRM ] || [ ${model} = LPJ-GUESS-SPITFIRE ] || [ ${model} = ORCHIDEE-SPITFIRE ] ; then
          cp native_grid/${model}_${exp}_fFire.nc \
@@ -103,7 +104,7 @@ for grid_res in native coarse fine; do
                           ${grid_res}_grid/${model}_${exp}_fFire.nc \
                           ${grid_res}_grid/${model}_${exp}_fFire_annual_global.nc
         else
-            cdo -L -b F64 -yearsum coarse_grid/${model}_${exp}_fFire.nc \
+            cdo -L -b F64 -yearsum ${grid_res}_grid/${model}_${exp}_fFire.nc \
                           ${grid_res}_grid/${model}_${exp}_fFire_annual.nc
             cdo -L -b F64 -yearsum -fldsum -divc,1e+12 -mulc,86400 -muldpm -mul \
                           -chunit,'kg C m-2 s-1','PgC yr-1'\
