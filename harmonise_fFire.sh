@@ -60,7 +60,7 @@ for model in "${model_list[@]}"; do
     fi
 done
 
-#### Regrid all models on coarsest grid: Target CLASS-CTEM
+### Regrid all models on coarsest grid: Target CLASS-CTEM
 for model in "${model_list[@]}"; do
     if [ ${model} = CLASS-CTEM ] ; then
          cp native_grid/${model}_${exp}_fFire.nc \
