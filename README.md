@@ -13,4 +13,4 @@ Both shell scripts adjust all files so that variable, unit, dimensions names and
 and
 ```fine_grid.txt```
 
-The output files are monthly fire CO2 emissions (kg C m-2 s-1) and monthly burnt area fraction (%). LPJ-GUESS-GlobFirm only has annual output for both. Files with the suffix ```_annual.nc``` are gridded files aggregated to annual values. Files with the suffix ```_annual_global.nc``` are area weighted annual averages (burnt area fraction) and sums (fire CO2 emissions; unit: PgC yr-1). Files with the suffix ```_annual_global_Mha.nc``` are area weighted annual sums of burnt area in mega hectare per year.
+The output files are monthly fire CO2 emissions (kg C m-2 s-1) and monthly burnt area fraction (%). LPJ-GUESS-GlobFirm only has annual output for both. Files with the suffix ```_annual.nc``` are gridded files aggregated to annual values. Files with the suffix ```_annual_global.nc``` are area weighted annual averages (burnt area fraction; unit: %) and sums (fire CO2 emissions; unit: PgC yr-1). Files with the suffix ```_annual_global_Mha.nc``` are area weighted annual sums of burnt area in mega hectare per year.
