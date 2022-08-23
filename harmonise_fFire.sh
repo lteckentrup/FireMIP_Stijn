@@ -68,7 +68,7 @@ for model in "${model_list[@]}"; do
     fi
 done
 
-#### Regrid all models on finest grid: Target LPJ-GUESS.
+### Regrid all models on finest grid: Target LPJ-GUESS.
 ### ORCHIDEE also has a half degree grid
 for model in "${model_list[@]}"; do
     if [ ${model} = LPJ-GUESS-GlobFIRM ]; then
