@@ -7,7 +7,7 @@
 5. For fire CO2 emissions, run ```sh harmonise_fFire.sh```
 6. For burnt area, run ```sh harmonise_BA.sh```
 
-Both shell scripts adjust all files so that variable, unit, and dimensions names are the same. They also regrid all files on a common coarse grid (target: CLASS-CTEM) or a common fine grid (target: LPJ-GUESS and ORCHIDEE). The target grid files are stored in
+Both shell scripts adjust all files so that variable, unit, dimensions names and the North-South orientation are the same. They also regrid all files on a common coarse grid (target: CLASS-CTEM) or a common fine grid (target: LPJ-GUESS and ORCHIDEE). The target grid files are stored in
 
 ```coarse_grid.txt```
 and
