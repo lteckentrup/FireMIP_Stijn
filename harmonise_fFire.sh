@@ -44,27 +44,14 @@ ncrename -v longitude,lon -v latitude,lat -d longitude,lon -d latitude,lat \
 ### Select years 1901-2013, harmonize grid
 for model in "${model_list[@]}"; do
     echo ${model}
-    cdo -sellonlatbox,-180,180,-90,90 -selyear,1901/2013 \
-         raw/${model}_${exp}_fFire.nc \
-         native_grid/${model}_${exp}_fFire.nc
-done
-
-### Convert gridded files to total annual fire CO2 emissions. Output unit: PgC yr-1
-
-for model in "${model_list[@]}"; do
-    ### LPJ-GUESS-GlobFIRM only has annual fire CO2 emissions
-    if [ ${model} = LPJ-GUESS-GlobFIRM ] ; then
-        cdo -L -b F64 -fldsum -divc,1e+12 -mulc,86400 -muldpm -mul \
-                      -chunit,'kg C m-2 s-1','PgC yr-1'\
-                      native_grid/${model}_${exp}_fFire.nc -gridarea \
-                      native_grid/${model}_${exp}_fFire.nc \
-                      native_grid/${model}_${exp}_fFire_annual_global.nc
+    if [ ${model} == ORCHIDEE-SPITFIRE ]; then             
+         cdo -sellonlatbox,-180,180,-90,90 -invertlat -selyear,1901/2013 \
+              raw/${model}_${exp}_fFire.nc \
+              native_grid/${model}_${exp}_fFire.nc
     else
-        cdo -L -b F64 -yearsum -fldsum -divc,1e+12 -mulc,86400 -muldpm -mul \
-                      -chunit,'kg C m-2 s-1','PgC yr-1'\
-                      native_grid/${model}_${exp}_fFire.nc -gridarea \
-                      native_grid/${model}_${exp}_fFire.nc \
-                      native_grid/${model}_${exp}_fFire_annual_global.nc
+         cdo -sellonlatbox,-180,180,-90,90 -selyear,1901/2013 \
+              raw/${model}_${exp}_fFire.nc \
+              native_grid/${model}_${exp}_fFire.nc
     fi
 done
 
@@ -83,17 +70,14 @@ done
 #### Regrid all models on finest grid: Target LPJ-GUESS. 
 ### ORCHIDEE also has a half degree grid
 for model in "${model_list[@]}"; do
-    if [ ${model} = ORCHIDEE-SPITFIRE ]; then
-         cdo -b F64 invertlat native_grid/${model}_${exp}_fFire.nc \
-                              fine_grid/${model}_${exp}_fFire.nc
-    elif [ ${model} = LPJ-GUESS-GlobFIRM ]; then
+    if [ ${model} = LPJ-GUESS-GlobFIRM ]; then
          cp native_grid/${model}_${exp}_fFire.nc \
             fine_grid/${model}_${exp}_fFire_annual.nc
     elif [ ${model} = LPJ-GUESS-SIMFIRE-BLAZE ]; then 
          cdo -L -b F64 setgrid,fine_grid.txt \
              native_grid/${model}_${exp}_fFire.nc \
              fine_grid/${model}_${exp}_fFire.nc
-    elif [ ${model} = LPJ-GUESS-SPITFIRE ]; then
+    elif [ ${model} = LPJ-GUESS-SPITFIRE ] || [ ${model} = ORCHIDEE-SPITFIRE ]; then
            cp native_grid/${model}_${exp}_fFire.nc \
               fine_grid/${model}_${exp}_fFire.nc
     else
