@@ -1,4 +1,4 @@
-### Experiment
+### Define experiment: SF1, SF2_CO2, SF2_FPO, SF2_FLA, SF2_FLI or SF2_FCL
 exp='SF1'
 ### Model names
 if [ ${exp} = SF1 ] || [ ${exp} = SF2_CO2 ] || [ ${exp} = SF2_FLA ]; then
