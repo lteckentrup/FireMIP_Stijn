@@ -1,6 +1,6 @@
 # FireMIP_Stijn
 
-1. Rename all files in consistent ways: ```<model>_<experiment>_<variable>.nc```
+1. Rename all files in a consistent way: ```<model>_<experiment>_<variable>.nc```. Experiment names: SF1, SF2_CO2, SF2_FPO, SF2_FLA, SF2_FLI, and SF2_FCL.
 2. For each experiment: Move CLASS-CTEM, CLM, and LPJ-GUESS-SPITFIRE into 'corrupted' directory
 3. Move remaining models into 'raw' directory
 4. Create native_grid, fine_grid, and coarse_grid directory
