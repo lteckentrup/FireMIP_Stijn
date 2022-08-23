@@ -49,6 +49,10 @@ for model in "${model_list[@]}"; do
          cdo -sellonlatbox,-180,180,-90,90 -invertlat -selyear,1901/2013 \
               raw/${model}_${exp}_fFire.nc \
               native_grid/${model}_${exp}_fFire.nc
+    elif [ ${model} == LPJ-GUESS-GlobFIRM ]; then
+         cdo -sellonlatbox,-180,180,-90,90 -invertlat -selyear,1901/2013 \
+              raw/${model}_${exp}_fFire.nc \
+              native_grid/${model}_${exp}_fFire_annual.nc
     else
          cdo -sellonlatbox,-180,180,-90,90 -selyear,1901/2013 \
               raw/${model}_${exp}_fFire.nc \
@@ -95,8 +99,8 @@ for grid_res in native coarse fine; do
         if [ ${model} = LPJ-GUESS-GlobFIRM ] ; then
             cdo -L -b F64 -fldsum -divc,1e+12 -mulc,86400 -muldpm -mul \
                           -chunit,'kg C m-2 s-1','PgC yr-1'\
-                          ${grid_res}_grid/${model}_${exp}_fFire.nc -gridarea \
-                          ${grid_res}_grid/${model}_${exp}_fFire.nc \
+                          ${grid_res}_grid/${model}_${exp}_fFire_annual.nc -gridarea \
+                          ${grid_res}_grid/${model}_${exp}_fFire_annual.nc \
                           ${grid_res}_grid/${model}_${exp}_fFire_annual_global.nc
         else
             cdo -L -b F64 -yearsum ${grid_res}_grid/${model}_${exp}_fFire.nc \
