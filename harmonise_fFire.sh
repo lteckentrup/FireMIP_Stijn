@@ -1,4 +1,4 @@
-### Define experiment: SF1, SF2_CO2, SF2_FPO, SF2_FLA, SF2_FLI or SF2_FCL
+### Experiment
 exp='SF1'
 ### Model names
 if [ ${exp} = SF1 ] || [ ${exp} = SF2_CO2 ] || [ ${exp} = SF2_FLA ]; then
@@ -83,7 +83,7 @@ done
 #### Regrid all models on finest grid: Target LPJ-GUESS. 
 ### ORCHIDEE also has a half degree grid
 for model in "${model_list[@]}"; do
-    if [ ${model} = LPJ-GUESS-SPITFIRE ]; then
+    if [ ${model} = ORCHIDEE-SPITFIRE ]; then
          cdo -b F64 invertlat native_grid/${model}_${exp}_fFire.nc \
                               fine_grid/${model}_${exp}_fFire.nc
     elif [ ${model} = LPJ-GUESS-GlobFIRM ]; then
@@ -93,7 +93,7 @@ for model in "${model_list[@]}"; do
          cdo -L -b F64 setgrid,fine_grid.txt \
              native_grid/${model}_${exp}_fFire.nc \
              fine_grid/${model}_${exp}_fFire.nc
-    elif [ ${model} = ORCHIDEE-SPITFIRE ]; then
+    elif [ ${model} = LPJ-GUESS-SPITFIRE ]; then
            cp native_grid/${model}_${exp}_fFire.nc \
               fine_grid/${model}_${exp}_fFire.nc
     else
