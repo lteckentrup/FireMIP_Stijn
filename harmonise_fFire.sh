@@ -83,9 +83,19 @@ done
 #### Regrid all models on finest grid: Target LPJ-GUESS. 
 ### ORCHIDEE also has a half degree grid
 for model in "${model_list[@]}"; do
-    if [ ${model} = LPJ-GUESS-GlobFIRM ] || [ ${model} = LPJ-GUESS-GlobFIRM ] || [ ${model} = LPJ-GUESS-SPITFIRE ] || [ ${model} = ORCHIDEE-SPITFIRE ] ; then
+    if [ ${model} = LPJ-GUESS-SPITFIRE ]; then
+         cdo -b F64 invertlat native_grid/${model}_${exp}_fFire.nc \
+                              fine_grid/${model}_${exp}_fFire.nc
+    elif [ ${model} = LPJ-GUESS-GlobFIRM ]; then
          cp native_grid/${model}_${exp}_fFire.nc \
-            fine_grid/${model}_${exp}_fFire.nc
+            fine_grid/${model}_${exp}_fFire_annual.nc
+    elif [ ${model} = LPJ-GUESS-SIMFIRE-BLAZE ]; then 
+         cdo -L -b F64 setgrid,fine_grid.txt \
+             native_grid/${model}_${exp}_fFire.nc \
+             fine_grid/${model}_${exp}_fFire.nc
+    elif [ ${model} = ORCHIDEE-SPITFIRE ]; then
+           cp native_grid/${model}_${exp}_fFire.nc \
+              fine_grid/${model}_${exp}_fFire.nc
     else
          cdo -L -b F64 -remapycon,fine_grid.txt \
              native_grid/${model}_${exp}_fFire.nc \
