@@ -28,8 +28,8 @@ da.time.encoding['units'] = 'Months since 1850-01-01 00:00:00'
 da.time.encoding['long_name'] = 'time'
 da.time.encoding['calendar'] = '365_day'
 
-da['lat'].attrs={'units':'degrees', 'long_name':'latitude'}
-da['lon'].attrs={'units':'degrees', 'long_name':'longitude'}
+da['lat'].attrs={'units':'degrees_north', 'long_name':'latitude'}
+da['lon'].attrs={'units':'degrees_east', 'long_name':'longitude'}
 
 ds = da.to_dataset(name='fFire')
 ds.to_netcdf('raw/'+fname,
