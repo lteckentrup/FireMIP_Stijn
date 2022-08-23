@@ -65,6 +65,10 @@ for model in "${model_list[@]}"; do
     if [ ${model} = CLASS-CTEM ] ; then
          cp native_grid/${model}_${exp}_fFire.nc \
             coarse_grid/${model}_${exp}_fFire.nc
+    elif [ ${model} = LPJ-GUESS-GlobFIRM ] ; then
+        cdo -L -b F64 -remapycon,coarse_grid.txt \
+            native_grid/${model}_${exp}_fFire_annual.nc \
+            coarse_grid/${model}_${exp}_fFire_annual.nc
     else
          cdo -L -b F64 -remapycon,coarse_grid.txt \
              native_grid/${model}_${exp}_fFire.nc \
@@ -76,7 +80,7 @@ done
 ### ORCHIDEE also has a half degree grid
 for model in "${model_list[@]}"; do
     if [ ${model} = LPJ-GUESS-GlobFIRM ]; then
-         cp native_grid/${model}_${exp}_fFire.nc \
+         cp native_grid/${model}_${exp}_fFire_annual.nc \
             fine_grid/${model}_${exp}_fFire_annual.nc
     elif [ ${model} = LPJ-GUESS-SIMFIRE-BLAZE ]; then
          cdo -L -b F64 setgrid,fine_grid.txt \
