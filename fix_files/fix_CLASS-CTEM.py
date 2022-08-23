@@ -26,8 +26,9 @@ ds['x'] = lon
 ds = ds.rename({'y': 'lat', 'x' : 'lon'})
 
 ### Set attributes
-ds['lat'].attrs={'units':'degrees', 'long_name':'latitude'}
-ds['lon'].attrs={'units':'degrees', 'long_name':'longitude'}
+ds['fFire'].attrs={'units':'kg C m-2 s-1', 'long_name':'latitude'}
+ds['lon'].attrs={'units':'degrees_east', 'long_name':'longitude'}
+ds['lat'].attrs={'units':'degrees_north', 'long_name':'latitude'}
 
 ### Write to netCDF
 ds.to_netcdf('raw/'+fname,
