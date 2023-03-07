@@ -107,7 +107,7 @@ for grid_res in native coarse fine; do
                           ${grid_res}_grid/${model}_${exp}_fFire_annual.nc \
                           ${grid_res}_grid/${model}_${exp}_fFire_annual_global.nc
         else
-            cdo -L -b F64 -yearsum ${grid_res}_grid/${model}_${exp}_fFire.nc \
+            cdo -L -b F64 -yearmean ${grid_res}_grid/${model}_${exp}_fFire.nc \
                           ${grid_res}_grid/${model}_${exp}_fFire_annual.nc
             cdo -L -b F64 -yearsum -fldsum -divc,1e+12 -mulc,86400 -muldpm -mul \
                           -chunit,'kg C m-2 s-1','PgC yr-1'\
